@@ -1,4 +1,4 @@
-# spring-boot-demo
+# Real Estate Listing Search
 
 Java Spring Boot server REST API to return real estate listings.
 
