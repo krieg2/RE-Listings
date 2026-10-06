@@ -1,0 +1,27 @@
+.App {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.search-controls {
+  flex: 1 1 auto;
+  text-align: left;
+  input {
+    display: block;
+  }
+}
+
+.search-results {
+  flex: 1 1 50%;
+}
+
+.heading {
+  display: block;
+  width: 100%;
+}
+
+.active {
+  background-color: blue;
+  color: white;
+}
