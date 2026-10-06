@@ -2,7 +2,7 @@
 
 Java Spring Boot server REST API to return real estate listings.
 
-The main controller endpoint is "/listings" returns a paginated results list of real estate listings and accepts the following query parameters:
+The main controller endpoint "/listings" returns a paginated results list of real estate listings and accepts the following query parameters:
 * int page
 * int size
 * String minPrice
