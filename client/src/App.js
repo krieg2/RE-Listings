@@ -4,6 +4,7 @@ import Listing from './Listing';
 import Paginator from './Paginator';
 
 function App() {
+  const [targetBudget, setTargetBudget] = useState(0);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000000);
   const [minBedrooms, setMinBedrooms] = useState(0);
@@ -18,7 +19,9 @@ function App() {
 
   const search = async (requestPage) => {
     let urlString = "http://localhost:8080/listings";
-    urlString += `?minPrice=${minPrice}&maxPrice=${maxPrice}&minBedrooms=${minBedrooms}&page=${requestPage}`;
+    urlString += `?targetBudget=${targetBudget}`;
+    urlString += `&minPrice=${minPrice}&maxPrice=${maxPrice}&minBedrooms=${minBedrooms}`;
+    urlString += `&page=${requestPage}`;
 
     if(city) urlString += `&city=${city}`;
     if(description) urlString += `&description=${description}`;
@@ -69,6 +72,9 @@ function App() {
 
       <div className="search-controls">
 
+        <label htmlFor="min-price">Target Budget:</label>
+        <input value={targetBudget} onChange={(e) => setTargetBudget(e.target.value)} type="number" id="target-budget" min="0" max="100000" step="0.01" />
+        
         <label htmlFor="min-price">Min Price:</label>
         <input value={minPrice} onChange={(e) => setMinPrice(e.target.value)} type="number" id="min-price" min="0" max="100000" step="0.01" />
         

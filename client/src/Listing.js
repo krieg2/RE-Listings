@@ -2,7 +2,7 @@ import './Listing.css';
 
 const Listing = ({ id, source, address, city, state, zip,
     price, bedrooms, bathrooms, sqft, latitude, longitude,
-    listedDate, status, description }) => {
+    listedDate, status, description, score }) => {
 
     return (<div className="listing">
         <div><label>id:</label> <span>{id}</span></div>
@@ -20,6 +20,7 @@ const Listing = ({ id, source, address, city, state, zip,
         <div><label>listedDate:</label> <span>{listedDate}</span></div>
         <div><label>status:</label> <span>{status}</span></div>
         <div><label>description:</label> <span>{description}</span></div>
+        <div><label>score:</label> <span>{score}</span></div>
     </div>);
 };
 
