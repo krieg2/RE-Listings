@@ -27,5 +27,6 @@ public class ListingDto {
     public LocalDate listedDate;
     public String status;
     public String description;
+    public int score;
 
 }

@@ -5,6 +5,8 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.core.io.Resource;
@@ -37,5 +39,39 @@ public class ListingService {
         }
     }
 
+    /**
+     * Calculates the scores for listings from 0 to 100 points.
+     * Algorithm is based on closest to the targetBudget amount and most recent.
+     *
+     * @param targetBudget The float amount of the target budget
+     * @param listings The list of ListingDto listings
+     * @return No return value. Assigns the scores to listings objects.
+     */
+    public void scoreListings(float targetBudget, List<ListingDto> listings) {
+
+        LocalDate mostRecent = null;
+        for(ListingDto listing : listings) {
+            if(mostRecent == null || listing.listedDate.compareTo(mostRecent) > 0) {
+                mostRecent = listing.listedDate;
+            }
+        }
+
+        for(ListingDto listing : listings) {
+            // Formula to calculate score out of 100 points based on
+            // price difference from targetBudget.
+            float difference = Math.abs(targetBudget - listing.price);
+            float ratio = difference/listing.price;
+            int score = 100 - (int)(ratio*100);
+
+            // Subtract 1 point per every 10 days since the most recent listing.
+            long totalDays = listing.listedDate.until(mostRecent, ChronoUnit.DAYS);
+            score -= (totalDays/10);
+
+            if(score < 0) score = 0;
+
+            listing.score = score;
+        }
+
+    }
     
 }

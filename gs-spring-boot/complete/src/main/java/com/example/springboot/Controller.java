@@ -36,6 +36,7 @@ public class Controller {
 
 	@GetMapping("/listings")
 	public Page<ListingDto> getListings(
+		@RequestParam(required = true, defaultValue = "0") String targetBudget,
 		@RequestParam(required = true, defaultValue = "0") int page,
 		@RequestParam(required = true, defaultValue = "5") int size,
 		@RequestParam(required = true, defaultValue = "0") String minPrice,
@@ -63,6 +64,7 @@ public class Controller {
 					results.add(listing);
 				}
 			}
+			listingService.scoreListings(Float.parseFloat(targetBudget.trim()), results);
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 		}

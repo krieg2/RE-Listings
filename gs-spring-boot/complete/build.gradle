@@ -28,6 +28,7 @@ dependencies {
 
 	// tag::tests[]
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testCompileOnly 'org.projectlombok:lombok:1.18.36'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
 	// end::tests[]
@@ -35,4 +36,8 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+	testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true // Shows your print statements/logs
+    }
 }
